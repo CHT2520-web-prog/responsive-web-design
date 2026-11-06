@@ -14,7 +14,7 @@ closeIcon.addEventListener("click", () => {
 })
 
 // Toggle the hide css class for these elements
-function toggleNav() {
+const toggleNav = () => {
     navList.classList.toggle('hide')
     openIcon.classList.toggle('hide')
     closeIcon.classList.toggle('hide')
