@@ -287,32 +287,33 @@ We don't want the navigation options to appear below the logo, we want them to b
 
 - Add a new div `desktop-header-wrapper`, make sure you add the `div` in the correct place i.e.
 
-```html<header class="header">
-        <!-- This is the new <div> elements -->
-        <div class="desktop-header-wrapper">
-            <div class="header-wrapper">
-                <div class="logo">
-                    Amazing Film App
-                </div>
-                <button id="openIcon" class="hide menu-icon">
-                    <svg width="30px" viewBox="0 0 10 10" fill="none">
-                        <path d='M1 1h8M1 4h 8M1 7h8' stroke='#666' stroke-width='1' />
-                    </svg>
-                </button>
-                <button id="closeIcon" class="menu-icon ">
-                    X
-                </button>
+```html
+<header class="header">
+    <!-- This is the new <div> elements -->
+    <div class="desktop-header-wrapper">
+        <div class="header-wrapper">
+            <div class="logo">
+                Amazing Film App
             </div>
-            <nav>
-                <ul id="navList" class="nav-list">
-                    <li class="nav-opt"><a class="nav-link" href="#">Home</a></li>
-                    <li class="nav-opt"><a class="nav-link" href="#">Add New film</a></li>
-                    <li class="nav-opt"><a class="nav-link" href="#">About</a></li>
-                </ul>
-            </nav>
-        <!-- The new <div> element closes here -->
+            <button id="openIcon" class="hide menu-icon">
+                <svg width="30px" viewBox="0 0 10 10" fill="none">
+                    <path d='M1 1h8M1 4h 8M1 7h8' stroke='#666' stroke-width='1' />
+                </svg>
+            </button>
+            <button id="closeIcon" class="menu-icon ">
+                X
+            </button>
         </div>
-    </header>
+        <nav>
+            <ul id="navList" class="nav-list">
+                <li class="nav-opt"><a class="nav-link" href="#">Home</a></li>
+                <li class="nav-opt"><a class="nav-link" href="#">Add New film</a></li>
+                <li class="nav-opt"><a class="nav-link" href="#">About</a></li>
+            </ul>
+        </nav>
+    <!-- The new <div> element closes here -->
+    </div>
+</header>
 ```
 
 - Add a new css rule for this `div` element, making sure it is inside the media query declaration.
