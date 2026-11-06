@@ -1,7 +1,5 @@
 # Responsive Design
 
-## If you are using Codespaces <a name="codespaces"></a>
-
 - Open your existing codespace (The one we used in the first four weeks of the module) [https://github.com/codespaces](https://github.com/codespaces).
 - In the terminal enter
 
@@ -11,22 +9,6 @@ git clone https://github.com/CHT2520-web-prog/responsive-web-design
 
 This will copy the contents of this repository into your codespace.
 
-## If you are using XAMPP <a name="xampp"></a>
-
-- Download this repository and unzip it. Move the folder into your _htdocs_ directory on XAMPP.
-
-## Completing the practical work <a name="practical"></a>
-
-- Open _index.html_ in a browser.
-  - It doesn't have any styling, but make sure you can view the page.
-  - In VS Code, take a moment to look through the HTML.
-  - Notice that SVG has been used to create the 'hamburger' icon.
-
-We will take a mobile first strategy and implement a responsive design for this web page.
-
-- In a browser open the developer tools (right-click on the page and select inspect).
-- Resize the web page to about 500px, mimicking how the page would look on a mobile device.
-
 ### Adding Some Basic Styles
 
 - A CSS file has already been linked to the page. Find _css/style.css_ and add the following CSS rules:
@@ -34,27 +16,41 @@ We will take a mobile first strategy and implement a responsive design for this 
 ```css
 /*Basic properties*/
 
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 html {
-  margin: 0;
+    margin: 0;
 }
+
 body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  color: rgb(8, 47, 73);
-  font-size: 1.1em;
-  line-height: 1.5;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    color: rgb(8, 47, 73);
+    font-size: 1.1rem;
+    line-height: 1.5;
 }
-div,
-ul,
-header,
-nav {
-  box-sizing: border-box;
-}
+
 a {
-  text-decoration: none;
+    color: inherit;
+    text-decoration: none;
 }
+
+ul {
+    margin: 0;
+    padding: 0;
+}
+
 li {
-  list-style-type: none;
+    list-style: none;
+}
+
+button {
+    font: inherit;
 }
 ```
 
@@ -66,31 +62,55 @@ li {
 - Next, add some rules to style the navigation bar
 
 ```css
-/* CSS rules for the header*/
+
+/* ---------- Header and mobile navigation ---------- */
+
 .header {
-  background-color: rgb(8, 47, 73);
-  color: white;
+    background-color: rgb(8, 47, 73);
+    color: white;
 }
+
+/* On mobile, the logo and menu controls share a row. */
 .header-wrapper {
-  display: flex;
-  justify-content: space-between;
-  padding: 0.75em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
 }
-.nav-list {
-  margin: 0;
+
+.logo {
+    font-weight: bold;
 }
-.nav-opt {
-  border-top: 1px solid white;
-}
-.nav-link {
-  color: white;
-  display: block;
-}
-.nav-link:hover {
-  background-color: rgba(255, 255, 255, 0.25);
-}
+
 .menu-icon {
-  cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    min-width: 2.75rem;
+    min-height: 2.75rem;
+    padding: 0.4rem;
+    border: 0;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+}
+
+.nav-list {
+    margin: 0;
+    padding: 0;
+}
+
+.nav-opt {
+    border-top: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.nav-link {
+    display: block;
+    padding: 0.75rem 1rem;
+    color: white;
+}
+
+.nav-link:hover {
+    background-color: rgba(255, 255, 255, 0.15);
 }
 ```
 
@@ -105,22 +125,45 @@ Next, add some rules to style the main content of the page
 
 ```css
 /* CSS rules for the page contents*/
+
+
 .main-content {
-  padding: 0.25em;
+    padding: 1rem;
 }
+
 .content-list {
-  padding: 0;
+    margin: 0.25rem 0;
+    padding: 0;
 }
+
 .content-opt {
-  border-bottom: 1px solid rgb(8, 47, 73);
+    border-bottom: 1px solid rgb(8, 47, 73);
 }
+
 .content-link {
-  display: block;
+    display: block;
+    padding: 0.65rem 0.25rem;
+    color: rgb(8, 47, 73);
 }
+
+.content-link:hover {
+    background-color: rgba(8, 47, 73, 0.08);
+    text-decoration: underline;
+}
+
+.content-link:focus-visible {
+    outline: 3px solid #2563eb;
+    outline-offset: 2px;
+}
+
+/* Keep the film poster within the available screen width. */
 .poster {
-  display: block;
-  margin: auto;
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 1rem auto;
 }
+
 ```
 
 - Check this works.
@@ -130,9 +173,10 @@ Next, add some rules to style the main content of the page
 
 ### Hiding and Showing the Navigation
 
-- Add the following `hide` class to the CSS.
+- Add the following `hide` class to the CSS (after the basic properties block)
 
 ```css
+/* Utility Classes */
 .hide {
   display: none;
 }
@@ -141,44 +185,25 @@ Next, add some rules to style the main content of the page
 - Add this class to the hamburger (the open) icon i.e.
 
 ```html
-<div id="openIcon" class="hide menu-icon">
-  <svg width="30px" viewBox="0 0 10 10" fill="none">
-    <path d="M1 1h8M1 4h 8M1 7h8" stroke="#666" stroke-width="1" />
-  </svg>
-</div>
+<button id="openIcon" class="hide menu-icon">
+    <svg width="30px" viewBox="0 0 10 10" fill="none">
+        <path d='M1 1h8M1 4h 8M1 7h8' stroke='#666' stroke-width='1' />
+    </svg>
+</button>
 ```
 
 - Refresh the page, the hamburger icon should be hidden.
 
 - At the bottom of the HTML page there is a link to a JavaScript file.
 - Have a look at the JavaScript file.
-
   - Even if you've never used JavaScript before you should be able to make sense of this code.
   - The first three lines grab hold of HTML elements. See if you can find these elements in the HTML page.
+  - We then specify event listeners for the `openIcon` and `closeIcon` elements. When these page elements are clicked, the `toggleNav()` function will be run. 
   - The `toggleNav()` function will 'toggle' the `hide` class for these elements. So if an element is hidden it will be made visible and vice versa.
-
-- The final thing we need to do to is run this function when the user clicks the close icon or the hamburger icon.
-- Modify the HTML of the close icon to add an `onclick` handler that will call the `toggleNav()` function i.e.
-
-```html
-<div id="closeIcon" onclick="toggleNav()" class="menu-icon ">X</div>
-```
 
 - Test this works.
 
-  - When the user clicks the 'X', the menu and close icon will be hidden and the hamburger icon will be made visible.
-
-- Finally, add a click event handler to the hamburger icon so the user can make them visible again.
-
-```html
-<div onclick="toggleNav()" id="openIcon" class="hide menu-icon">
-  <svg width="30px" viewBox="0 0 10 10" fill="none">
-    <path d="M1 1h8M1 4h 8M1 7h8" stroke="#666" stroke-width="1" />
-  </svg>
-</div>
-```
-
-- Again test this works. The menu should fully work allowing the user to hide/show the navigation options.
+  - When the user clicks the 'X', the menu and close icon will be hidden and the hamburger icon will be made visible. When the user clicks the hamburger, the menu will be made visible. 
 
 ### Making This Responsive
 
@@ -187,17 +212,96 @@ This design works fine for mobile users. For users with larger displays they don
 - Add the following media query to the CSS file.
 
 ```css
+
+/* ---------- Tablet and desktop layout ---------- */
+
 @media screen and (min-width: 640px) {
-  .menu-icon {
-    display: none;
-  }
-  .nav-list {
-    display: block;
-  }
-  .nav-opt {
-    display: inline-block;
-    border-top: 0;
-  }
+
+    /*
+   * The outer wrapper aligns the logo area and navigation
+   * horizontally. The inner header wrapper contains the logo
+   * and mobile menu controls.
+   */
+    .desktop-header-wrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .header-wrapper {
+        padding: 0.75rem 1rem;
+    }
+
+    /* The mobile menu controls are not needed at this width. */
+    .menu-icon {
+        display: none;
+    }
+
+    /*
+   * Display navigation links in a horizontal row.
+   * The desktop rule also overrides .hide if JavaScript has
+   * left that class on the navigation list.
+   */
+    .nav-list {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 0 1rem;
+    }
+
+    .nav-opt {
+        border: 0;
+    }
+
+    .nav-link {
+        display: inline-block;
+        padding: 0.5rem 0;
+    }
+
+    .nav-link:hover {
+        background-color: transparent;
+        text-decoration: underline;
+    }
+
+    /* Two-column layout for the film lists. */
+    .main-content {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .content-list-holder {
+        flex: 1 1 calc(50% - 1rem);
+        min-width: 0;
+    }
+
+    .content-list {
+        margin: 0.25rem;
+    }
+
+    .recommended-film {
+        display: flex;
+        gap: 2rem;
+        align-items: flex-start;
+    }
+
+    .recommended-film p {
+        flex: 2;
+        margin-top: 0;
+    }
+
+    .poster {
+        flex: 1;
+        max-width: 200px;
+        height: auto;
+        margin-top: 0;
+    }
+
+    /* .poster {
+        margin: 1rem auto;
+    } */
 }
 ```
 
@@ -208,29 +312,32 @@ We don't want the navigation options to appear below the logo, we want them to b
 
 - Add a new div `desktop-header-wrapper`, make sure you add the `div` in the correct place i.e.
 
-```html
-<header class="header">
-  <!--this is the new opening div-->
-  <div class="desktop-header-wrapper">
-    <div class="header-wrapper">
-      <div class="logo">Amazing Film App</div>
-      <div onclick="toggleNav()" id="openIcon" class="menu-icon">
-        <svg width="30px" viewBox="0 0 10 10" fill="none">
-          <path d="M1 1h8M1 4h 8M1 7h8" stroke="#666" stroke-width="1" />
-        </svg>
-      </div>
-      <div id="closeIcon" onclick="toggleNav()" class="menu-icon hide">X</div>
-    </div>
-    <nav>
-      <ul id="navList" class="nav-list">
-        <li class="nav-opt"><a class="nav-link" href="#">Home</a></li>
-        <li class="nav-opt"><a class="nav-link" href="#">Add New film</a></li>
-        <li class="nav-opt"><a class="nav-link" href="#">About</a></li>
-      </ul>
-    </nav>
-    <!--the new div closes here-->
-  </div>
-</header>
+```html<header class="header">
+        <!-- This is the new <div> elements -->
+        <div class="desktop-header-wrapper">
+            <div class="header-wrapper">
+                <div class="logo">
+                    Amazing Film App
+                </div>
+                <button id="openIcon" class="hide menu-icon">
+                    <svg width="30px" viewBox="0 0 10 10" fill="none">
+                        <path d='M1 1h8M1 4h 8M1 7h8' stroke='#666' stroke-width='1' />
+                    </svg>
+                </button>
+                <button id="closeIcon" class="menu-icon ">
+                    X
+                </button>
+            </div>
+            <nav>
+                <ul id="navList" class="nav-list">
+                    <li class="nav-opt"><a class="nav-link" href="#">Home</a></li>
+                    <li class="nav-opt"><a class="nav-link" href="#">Add New film</a></li>
+                    <li class="nav-opt"><a class="nav-link" href="#">About</a></li>
+                </ul>
+            </nav>
+        <!-- The new <div> element closes here -->
+        </div>
+    </header>
 ```
 
 - Add a new css rule for this `div` element, making sure it is inside the media query declaration.
