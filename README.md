@@ -20,7 +20,15 @@ cd responsive-web-design
 php -S 0.0.0.0:8000
 ```
 
-- View the page in a browser. 
+- View the page in a browser.
+- It doesn't have any styling, but make sure you can view the page.
+- In VS Code, take a moment to look through the HTML.
+- Notice that SVG has been used to create the 'hamburger' icon.
+
+We will take a mobile first strategy and implement a responsive design for this web page.
+
+- In the browser open the developer tools (right-click on the page and select inspect).
+- Resize the web page to about 500px, mimicking how the page would look on a mobile device.
 
 
 ### Adding Some Basic Styles
