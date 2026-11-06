@@ -127,7 +127,6 @@ button {
 
 .nav-link {
     display: block;
-    padding: 0.75rem 1rem;
     color: white;
 }
 
@@ -165,18 +164,9 @@ Next, add some rules to style the main content of the page
 .content-link {
     display: block;
     padding: 0.65rem 0.25rem;
-    color: rgb(8, 47, 73);
 }
 
-.content-link:hover {
-    background-color: rgba(8, 47, 73, 0.08);
-    text-decoration: underline;
-}
 
-.content-link:focus-visible {
-    outline: 3px solid #2563eb;
-    outline-offset: 2px;
-}
 
 /* Keep the film poster within the available screen width. */
 .poster {
@@ -235,11 +225,9 @@ This design works fine for mobile users. For users with larger displays they don
 
 ```css
 
-/* ---------- Tablet and desktop layout ---------- */
+/* Tablet and desktop layout */
 
 @media screen and (min-width: 640px) {
-
-
 
     .header-wrapper {
         padding: 0.75rem 1rem;
@@ -250,11 +238,7 @@ This design works fine for mobile users. For users with larger displays they don
         display: none;
     }
 
-    /*
-   * Display navigation links in a horizontal row.
-   * The desktop rule also overrides .hide if JavaScript has
-   * left that class on the navigation list.
-   */
+    /* Display navigation links in a horizontal row. */
     .nav-list {
         display: flex;
         align-items: center;
@@ -275,7 +259,6 @@ This design works fine for mobile users. For users with larger displays they don
         background-color: transparent;
         text-decoration: underline;
     }
-
 
 }
 ```
@@ -330,32 +313,6 @@ We don't want the navigation options to appear below the logo, we want them to b
 - Save the changes and test in a browser.
   - The navigation options should be aligned to the right-hand side, inside the header.
 
-### Styling the Recommended Film Section
-
-- Add the following CSS rules. Again, make sure this is within the media query declaration.
-```css
-
-/* Styling the recommended film section
-.recommended-film {
-    display: flex;
-    gap: 2rem;
-    align-items: flex-start;
-}
-
-.recommended-film p {
-    flex: 2;
-    margin-top: 0;
-}
-
-.poster {
-    flex: 1;
-    max-width: 200px;
-    height: auto;
-    margin-top: 0;
-}
-```
-- This creates a two-columned layout, placing the poster next to the film description. 
-
 ### Styling the Films Lists
 
 - Add the following CSS rules. Again, make sure this is within the media query declaration.
@@ -381,8 +338,8 @@ We don't want the navigation options to appear below the logo, we want them to b
 }
 ```
 
-- This also creates two columns.
-  - Again, we use the flexbox, but we want the two columns to always be the same size, we calculate their width as 50% of their containing element, minus 1rem. 
+- This creates two columns.
+  - We use the flexbox. We want the two columns to always be the same size, we calculate their width as 50% of their containing element, minus 1rem. 
 
 ### Limiting the Final Page Size
 
@@ -408,7 +365,8 @@ You should find that this works fine. However, when viewed on a wider display e.
 ### Testing Your Understanding
 
 - Completing the above gets a basic design to work. There are many ways in which it can be improved.
-- The navigation items would benefit from being given a bit more 'white space' and they need aligning properly with the logo text in both the mobile view and at wider screen sizes.
-- The links in the main content of the page would benefit from styling e.g. changing the colour to fit with the rest of the design and adding a `hover` to give feedback to the user.
+- The navigation items would benefit from being given a bit more 'white space' and they need aligning properly with the logo text.
+- In the desktop view, in the `<div class="recommended-film">` `div` element, it would be good if the poster and the film description displayed next to each other. How can you create a two-columned layout for this part of the page. 
+- The links/navigation options in the desktop view would benefit from styling e.g. adding a `hover` to give feedback to the user.
 - The hamburger menu is grey. Can you change this to white.
 - Instead of using an 'X' for the close, can you use an SVG close icon.
