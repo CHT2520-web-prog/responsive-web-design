@@ -9,6 +9,20 @@ git clone https://github.com/CHT2520-web-prog/responsive-web-design
 
 This will copy the contents of this repository into your codespace.
 
+- In terminal, navigate to the _responsive-web-design_ folder
+
+```
+cd responsive-web-design
+
+```
+- Start the web server
+```
+php -S 0.0.0.0:8000
+```
+
+- View the page in a browser. 
+
+
 ### Adding Some Basic Styles
 
 - A CSS file has already been linked to the page. Find _css/style.css_ and add the following CSS rules:
@@ -176,7 +190,7 @@ Next, add some rules to style the main content of the page
 - Add the following `hide` class to the CSS (after the basic properties block)
 
 ```css
-/* Utility Classes */
+/* Utility classes */
 .hide {
   display: none;
 }
@@ -217,16 +231,7 @@ This design works fine for mobile users. For users with larger displays they don
 
 @media screen and (min-width: 640px) {
 
-    /*
-   * The outer wrapper aligns the logo area and navigation
-   * horizontally. The inner header wrapper contains the logo
-   * and mobile menu controls.
-   */
-    .desktop-header-wrapper {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
+
 
     .header-wrapper {
         padding: 0.75rem 1rem;
@@ -263,45 +268,7 @@ This design works fine for mobile users. For users with larger displays they don
         text-decoration: underline;
     }
 
-    /* Two-column layout for the film lists. */
-    .main-content {
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        align-items: flex-start;
-        gap: 1rem;
-    }
 
-    .content-list-holder {
-        flex: 1 1 calc(50% - 1rem);
-        min-width: 0;
-    }
-
-    .content-list {
-        margin: 0.25rem;
-    }
-
-    .recommended-film {
-        display: flex;
-        gap: 2rem;
-        align-items: flex-start;
-    }
-
-    .recommended-film p {
-        flex: 2;
-        margin-top: 0;
-    }
-
-    .poster {
-        flex: 1;
-        max-width: 200px;
-        height: auto;
-        margin-top: 0;
-    }
-
-    /* .poster {
-        margin: 1rem auto;
-    } */
 }
 ```
 
@@ -343,39 +310,70 @@ We don't want the navigation options to appear below the logo, we want them to b
 - Add a new css rule for this `div` element, making sure it is inside the media query declaration.
 
 ```css
+/* The outer wrapper aligns the logo area and navigation horizontally. */
 .desktop-header-wrapper {
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 ```
 
 - Save the changes and test in a browser.
   - The navigation options should be aligned to the right-hand side, inside the header.
 
-### Adding a Two Columned Layout
+### Styling the Recommended Film Section
+
+- Add the following CSS rules. Again, make sure this is within the media query declaration.
+```css
+
+/* Styling the recommended film section
+.recommended-film {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+.recommended-film p {
+    flex: 2;
+    margin-top: 0;
+}
+
+.poster {
+    flex: 1;
+    max-width: 200px;
+    height: auto;
+    margin-top: 0;
+}
+```
+- This creates a two-columned layout, placing the poster next to the film description. 
+
+### Styling the Films Lists
 
 - Add the following CSS rules. Again, make sure this is within the media query declaration.
 
 ```css
+
+/* Two-column layout for the film lists. */
 .main-content {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 1rem;
 }
+
 .content-list-holder {
-  width: 50%;
+    flex: 1 1 calc(50% - 1rem);
+    min-width: 0;
 }
+
 .content-list {
-  margin: 0.25em;
-}
-.poster {
-  float: right;
+    margin: 0.25rem;
 }
 ```
 
-- This creates two columns in the main content area of the page.
-  - The 'Recommended' text should be next to the film poster. We used the `float` property to achieve this.
-  - The two lists of films should be side by side. We set their width to 50% and made their parent a flexbox.
+- This also creates two columns.
+  - Again, we use the flexbox, but we want the two columns to always be the same size, we calculate their width as 50% of their containing element, minus 1rem. 
 
 ### Limiting the Final Page Size
 
@@ -385,12 +383,13 @@ You should find that this works fine. However, when viewed on a wider display e.
 
 ```css
 @media screen and (min-width: 1024px) {
-  .desktop-header-wrapper,
-  .main-content {
-    width: 1024px;
-    margin-left: auto;
-    margin-right: auto;
-  }
+    .desktop-header-wrapper,
+    .main-content {
+        width: 100%;
+        max-width: 1024px;
+        margin-right: auto;
+        margin-left: auto;
+    }
 }
 ```
 
